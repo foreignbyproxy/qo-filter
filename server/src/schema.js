@@ -21,19 +21,21 @@ const typeDefs = gql`
 	}
 
 	type Instrument {
-		symbol: String!
+		callDate: String
+		callValue: Float
+		couponAnnualAmount: Float
+		couponRate: Float
 		description: String!
+		distributionDates: String
 		exchange: String
 		ipoDate: String
-		couponRate: Float
-		couponAnnualAmount: Float
-		parValue: Float
-		callValue: Float
-		callDate: String
 		maturityDate: String
 		moodysRating: String
+		parValue: Float
+		ratingsDate: String
 		spRating: String
-		distributionDates: String
+		symbol: String!
+		updatedAt: Int!
 	}
 `;
 

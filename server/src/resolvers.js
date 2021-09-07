@@ -25,12 +25,19 @@ module.exports = {
 	},
 	Mutation: {
 		updateInstruments: async (_, __, { dataSources }) => {
-			await dataSources.InstrumentAPI.updateFromQO();
+			try {
+				const numberOfUpdates = await dataSources.InstrumentAPI.updateFromQO();
 
-			return {
-				success: true,
-				message: "All data updated.",
-			};
+				return {
+					success: true,
+					message: `Updating/Inserting ${numberOfUpdates} stocks`,
+				};
+			} catch (error) {
+				return {
+					success: false,
+					message: error.getMessage(),
+				};
+			}
 		},
 	},
 };
