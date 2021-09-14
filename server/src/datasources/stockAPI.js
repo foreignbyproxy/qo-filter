@@ -17,8 +17,10 @@ class stockAPI extends DataSource {
 		this.context = config.context;
 	}
 
-	async getAllStocks() {
-		return await this.store.stocks.findAll();
+	getAllStocks(order = ["symbol", "ASC"]) {
+		return this.store.stocks.findAll({
+			order: [order],
+		});
 	}
 
 	async updateFromQO() {
@@ -27,12 +29,12 @@ class stockAPI extends DataSource {
 		stocks = stocks.map((stock) => {
 			return {
 				updatedAt: Date.now(),
-				...stock
+				...stock,
 			};
 		});
 
 		await this.store.stocks.bulkCreate(stocks, {
-			updateOnDuplicate: Object.keys(this.store.stocks.rawAttributes)
+			updateOnDuplicate: Object.keys(this.store.stocks.rawAttributes),
 		});
 
 		return stocks.length;

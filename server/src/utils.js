@@ -29,7 +29,7 @@ module.exports.createStore = () => {
 	});
 
 	db.sync({
-		force: true
+		// force: true
 	});
 
 	return { db, stocks };

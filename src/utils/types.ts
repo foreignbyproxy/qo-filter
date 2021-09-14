@@ -15,3 +15,10 @@ export interface Stock {
 	symbol: string
 	updatedAt: number
 }
+
+export interface StockQueryParama {
+	offset: number;
+	limit: number;
+	orderBy: string;
+	orderDirection: string;
+}

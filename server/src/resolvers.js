@@ -1,7 +1,11 @@
 module.exports = {
 	Query: {
-		stocks: async (_, { offset = 0, limit = 20 }, { dataSources }) => {
-			const allStocks = await dataSources.stockAPI.getAllStocks();
+		stocks: async (
+			_,
+			{ offset = 0, limit = 20, orderBy = "symbol", orderDirection = "ASC" },
+			{ dataSources }
+		) => {
+			const allStocks = await dataSources.stockAPI.getAllStocks([orderBy, orderDirection]);
 
 			const currentPage = offset / limit + 1;
 			const totalPages = Math.floor(allStocks.length / limit);

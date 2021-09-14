@@ -1,0 +1,66 @@
+.StockTableSortableHeader {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+
+	background-color: transparent;
+	border: none;
+
+	cursor: pointer;
+
+	&.active {
+		font-weight: 900;
+
+		.indicators {
+			display: flex;
+			flex-flow: column nowrap;
+			gap: 2px;
+
+			margin-left: 0.5rem;
+
+			&::before,
+			&::after {
+				content: " ";
+				display: inline-block;
+				width: 5px;
+				height: 5px;
+
+				border-color: gray;
+			}
+
+			&::before {
+				width: 0;
+				height: 0;
+				border-left: 5px solid transparent;
+				border-right: 5px solid transparent;
+
+				border-bottom: 5px solid gray;
+			}
+
+			&::after {
+				width: 0;
+				height: 0;
+				border-left: 5px solid transparent;
+				border-right: 5px solid transparent;
+
+				border-top: 5px solid gray;
+			}
+		}
+
+		&.active--asc {
+			.indicators {
+				&::after {
+					border-top: 5px solid black;
+				}
+			}
+		}
+
+		&.active--desc {
+			.indicators {
+				&::before {
+					border-bottom: 5px solid black;
+				}
+			}
+		}
+	}
+}

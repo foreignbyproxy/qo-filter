@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const ALL_STOCKS = gql`
-	query Query($stocksOffset: Int, $stocksLimit: Int) {
-		stocks(offset: $stocksOffset, limit: $stocksLimit) {
+	query Query($offset: Int, $limit: Int, $orderBy: String, $orderDirection: String) {
+		stocks(offset: $offset, limit: $limit, orderBy: $orderBy, orderDirection: $orderDirection) {
 			offset
 			limit
 			currentPage
@@ -31,7 +31,7 @@ export const ALL_STOCKS = gql`
 
 export const UPDATE_DATABASE = gql`
 	mutation Mutation {
-		updateInstruments {
+		updateStocks {
 			success
 			message
 		}

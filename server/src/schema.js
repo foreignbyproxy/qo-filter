@@ -5,7 +5,12 @@ const typeDefs = [
 	TimestampTypeDefinition,
 	gql`
 		type Query {
-			stocks(offset: Int, limit: Int): StockConnection!
+			stocks(
+				offset: Int,
+				limit: Int,
+				orderBy: String,
+				orderDirection: String,
+			): StockConnection!
 		}
 
 		type Mutation {
