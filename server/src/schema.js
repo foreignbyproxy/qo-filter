@@ -1,42 +1,49 @@
 const { gql } = require("apollo-server");
+const { TimestampTypeDefinition } = require("graphql-scalars");
 
-const typeDefs = gql`
-	type Query {
-		instruments(pageSize: Int, after: String): InstrumentConnection!
-	}
+const typeDefs = [
+	TimestampTypeDefinition,
+	gql`
+		type Query {
+			stocks(offset: Int, limit: Int): StockConnection!
+		}
 
-	type Mutation {
-		updateInstruments: UpdateInstruments!
-	}
+		type Mutation {
+			updateStocks: UpdateStocks!
+		}
 
-	type InstrumentConnection {
-		cursor: String
-		hasMore: Boolean!
-		instruments: [Instrument]!
-	}
+		type StockConnection {
+			offset: Int!
+			limit: Int!
+			currentPage: Int!
+			totalPages: Int!
+			stocks: [Stock]!
+		}
 
-	type UpdateInstruments {
-		success: Boolean!
-		message: String
-	}
+		type UpdateStocks {
+			success: Boolean!
+			message: String
+		}
 
-	type Instrument {
-		callDate: String
-		callValue: Float
-		couponAnnualAmount: Float
-		couponRate: Float
-		description: String!
-		distributionDates: String
-		exchange: String
-		ipoDate: String
-		maturityDate: String
-		moodysRating: String
-		parValue: Float
-		ratingsDate: String
-		spRating: String
-		symbol: String!
-		updatedAt: Int!
-	}
-`;
+		type Stock {
+			callDate: String
+			callValue: Float
+			couponAnnualAmount: Float
+			couponRate: Float
+			couponType: String
+			description: String!
+			distributionDates: String
+			exchange: String
+			ipoDate: String
+			maturityDate: String
+			moodysRating: String
+			parValue: Float
+			ratingsDate: String
+			spRating: String
+			symbol: String!
+			updatedAt: Timestamp!
+		}
+	`,
+];
 
 module.exports = typeDefs;

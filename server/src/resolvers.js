@@ -1,32 +1,25 @@
-const { paginateResults } = require("./utils");
-
 module.exports = {
 	Query: {
-		instruments: async (_, { pageSize = 20, after }, { dataSources }) => {
-			const allInstruments = await dataSources.InstrumentAPI.getAllInstruments();
+		stocks: async (_, { offset = 0, limit = 20 }, { dataSources }) => {
+			const allStocks = await dataSources.stockAPI.getAllStocks();
 
-			const instruments = paginateResults({
-				after,
-				pageSize,
-				results: allInstruments,
-			});
+			const currentPage = offset / limit + 1;
+			const totalPages = Math.floor(allStocks.length / limit);
+			const stocks = allStocks.slice(offset, offset + limit);
 
 			return {
-				instruments,
-				cursor: instruments.length ? instruments[instruments.length - 1].cursor : null,
-				// if the cursor of the end of the paginated results is the same as the
-				// last item in _all_ results, then there are no more results after this
-				hasMore: instruments.length
-					? instruments[instruments.length - 1].cursor !==
-					  allInstruments[allInstruments.length - 1].cursor
-					: false,
+				offset,
+				limit,
+				currentPage,
+				totalPages,
+				stocks,
 			};
 		},
 	},
 	Mutation: {
-		updateInstruments: async (_, __, { dataSources }) => {
+		updateStocks: async (_, __, { dataSources }) => {
 			try {
-				const numberOfUpdates = await dataSources.InstrumentAPI.updateFromQO();
+				const numberOfUpdates = await dataSources.stockAPI.updateFromQO();
 
 				return {
 					success: true,
@@ -35,7 +28,7 @@ module.exports = {
 			} catch (error) {
 				return {
 					success: false,
-					message: error.getMessage(),
+					message: error.message,
 				};
 			}
 		},

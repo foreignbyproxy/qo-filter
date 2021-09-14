@@ -1,8 +1,7 @@
 const { DataSource } = require("apollo-datasource");
 const { scrapQOData } = require("./utils");
-const faker = require("faker");
 
-class InstrumentAPI extends DataSource {
+class stockAPI extends DataSource {
 	constructor({ store }) {
 		super();
 		this.store = store;
@@ -18,8 +17,8 @@ class InstrumentAPI extends DataSource {
 		this.context = config.context;
 	}
 
-	async getAllInstruments() {
-		return await this.store.instruments.findAll();
+	async getAllStocks() {
+		return await this.store.stocks.findAll();
 	}
 
 	async updateFromQO() {
@@ -32,12 +31,12 @@ class InstrumentAPI extends DataSource {
 			};
 		});
 
-		await this.store.instruments.bulkCreate(stocks, {
-			updateOnDuplicate: Object.keys(this.store.instruments.rawAttributes)
+		await this.store.stocks.bulkCreate(stocks, {
+			updateOnDuplicate: Object.keys(this.store.stocks.rawAttributes)
 		});
 
 		return stocks.length;
 	}
 }
 
-module.exports = InstrumentAPI;
+module.exports = stockAPI;

@@ -1,0 +1,24 @@
+.DistributionDates {
+
+	.marker {
+		display: inline-block;
+
+		width: 10px;
+		height: 10px;
+
+		border: 1px solid black;
+
+		& + .marker {
+			margin-left: 0.5rem;
+		}
+
+		&.filled {
+			background-color: #007ddf;
+		}
+
+		&.empty {
+			background-color: #eeeeee;
+		}
+
+	}
+}

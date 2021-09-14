@@ -6,14 +6,14 @@ const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
 const { createStore } = require("./utils");
 
-const InstrumentAPI = require("./datasources/instrument");
+const stockAPI = require("./datasources/stockAPI");
 
 // creates a sequelize connection once. NOT for every request
 const store = createStore();
 
 // set up any dataSources our resolvers need
 const dataSources = () => ({
-	InstrumentAPI: new InstrumentAPI({ store }),
+	stockAPI: new stockAPI({ store }),
 });
 
 // Set up Apollo Server
@@ -45,7 +45,7 @@ module.exports = {
 	typeDefs,
 	resolvers,
 	ApolloServer,
-	InstrumentAPI,
+	stockAPI,
 	store,
 	server,
 };

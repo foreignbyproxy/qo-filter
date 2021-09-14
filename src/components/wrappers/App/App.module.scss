@@ -1,0 +1,42 @@
+.App {
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column;
+
+	.navigation {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+
+		padding: var(--padding);
+		background-color: black;
+	}
+
+	.links {
+		display: flex;
+		flex-flow: row nowrap;
+		gap: var(--padding-inline);
+
+		a {
+			color: white;
+		}
+	}
+
+	.main {
+		display: flex;
+		flex-flow: column;
+		flex: 1 1 0;
+
+		padding: var(--padding);
+
+		background-color: #eeeeee;
+
+		.wrapper {
+			flex: 1 1 0;
+
+			padding: 1rem;
+			border-radius: 4px;
+			background-color: white;
+		}
+	}
+}
