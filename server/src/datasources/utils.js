@@ -7,8 +7,8 @@ async function scrapQOData() {
 	const page = await browser.newPage();
 
 	await page.goto("https://www.quantumonline.com/login.cfm");
-	await page.$eval('input[name="acctname"]', (el) => (el.value = "ggerard.18"));
-	await page.$eval('input[name="pswrd"]', (el) => (el.value = "papag1108"));
+	await page.$eval('input[name="acctname"]', (el, QOU) => (el.value = QOU), process.env.QOU);
+	await page.$eval('input[name="pswrd"]', (el, QOP) => (el.value = QOP), process.env.QOP);
 	await page.click('input[name="submit"]');
 	await page.goto(
 		"https://www.quantumonline.com/pfdtable.cfm?Type=AllPfds&SortColumn=symbol&Sortorder=ASC"
@@ -89,7 +89,6 @@ async function scrapQOData() {
 				}
 
 				return floatValue;
-
 			} else {
 				return 0;
 			}
@@ -98,24 +97,24 @@ async function scrapQOData() {
 		//Get the cell with the distribution dates a
 		function getDistributionDates(textContent) {
 			//Get the line of text that has the dates
-			let [dates] = textContent.split('\n').filter((value) => {
-				return value.split(/,|&/).length > 1
+			let [dates] = textContent.split("\n").filter((value) => {
+				return value.split(/,|&/).length > 1;
 			});
 
-			if(!dates) return null;
+			if (!dates) return null;
 
 			//Splits the list of distribution dates by the
 			let filteredDates = dates.split(/,|&/).reduce((carry, value) => {
-				let split = value.split('/');
+				let split = value.split("/");
 
-				if(split[0] >= 1 && split[0] <= 12) {
-					carry.push(value.trim())
+				if (split[0] >= 1 && split[0] <= 12) {
+					carry.push(value.trim());
 				}
 
 				return carry;
-			}, [])
+			}, []);
 
-			return filteredDates.join(',');
+			return filteredDates.join(",");
 		}
 
 		function formatStockData(row) {
