@@ -7,6 +7,7 @@ export const ALL_STOCKS = gql`
 			limit
 			currentPage
 			totalPages
+			totalStocks
 			stocks {
 				callDate
 				callValue

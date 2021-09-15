@@ -22,6 +22,7 @@ const typeDefs = [
 			limit: Int!
 			currentPage: Int!
 			totalPages: Int!
+			totalStocks: Int!
 			stocks: [Stock]!
 		}
 

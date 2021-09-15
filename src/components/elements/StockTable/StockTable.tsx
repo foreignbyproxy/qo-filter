@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-import type { Stock, StockQueryParama } from "../../../utils/types";
+import type { Stock, StockQueryParameters } from "../../../utils/types";
 import styles from "./StockTable.module.scss";
 
 import DistributionDates from "../DistributionDates/DistributionDates";
@@ -8,8 +8,8 @@ import StockTableSortableHeader from "../StockTableSortableHeader/StockTableSort
 
 interface StockTableProps {
 	stocks: Stock[];
-	queryParameters: StockQueryParama;
-	updateQuery: (payload: Partial<StockQueryParama>) => void;
+	queryParameters: StockQueryParameters;
+	updateQuery: (payload: Partial<StockQueryParameters>) => void;
 }
 
 const StockTable: FunctionComponent<StockTableProps> = ({

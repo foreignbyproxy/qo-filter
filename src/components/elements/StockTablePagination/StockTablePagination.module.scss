@@ -1,0 +1,14 @@
+.StockTablePagination {
+	display: flex;
+	flex-flow: row nowrap;
+	gap: 0.5rem;
+
+	margin-bottom: 0.5rem;
+
+	.info,
+	.limit {
+		display: flex;
+		flex-flow: row nowrap;
+		gap: 0.5rem;
+	}
+}

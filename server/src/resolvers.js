@@ -2,7 +2,7 @@ module.exports = {
 	Query: {
 		stocks: async (
 			_,
-			{ offset = 0, limit = 20, orderBy = "symbol", orderDirection = "ASC" },
+			{ offset = 0, limit = 25, orderBy = "symbol", orderDirection = "ASC" },
 			{ dataSources }
 		) => {
 			const allStocks = await dataSources.stockAPI.getAllStocks([orderBy, orderDirection]);
@@ -16,6 +16,7 @@ module.exports = {
 				limit,
 				currentPage,
 				totalPages,
+				totalStocks: allStocks.length,
 				stocks,
 			};
 		},
