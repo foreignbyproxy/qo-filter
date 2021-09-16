@@ -27,6 +27,7 @@ export interface Stock {
 	spRating: string;
 	symbol: string;
 	updatedAt: number;
+	favorite: boolean;
 }
 
 export interface StockQueryParameters {

@@ -4,10 +4,11 @@ import classnames from 'classnames'
 import BaseIcon from "@material-ui/icons/Autorenew";
 
 import styles from "./ButtonUpdateDatabase.module.scss";
-import { UPDATE_DATABASE } from "../../../utils/queries";
+
+import { UPDATE_STOCKS } from "../../../utils/queries";
 
 function ButtonUpdateDatabase() {
-	const [updateDatabase, { data, loading, error }] = useMutation(UPDATE_DATABASE);
+	const [updateDatabase, { data, loading, error }] = useMutation(UPDATE_STOCKS);
 
 	const buttonClasses = classnames(styles['ButtonUpdateDatabase'], {
 		[styles['loading']]: loading,

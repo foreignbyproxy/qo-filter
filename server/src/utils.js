@@ -26,6 +26,10 @@ module.exports.createStore = () => {
 		moodysRating: DataTypes.STRING,
 		spRating: DataTypes.STRING,
 		distributionDates: DataTypes.STRING,
+		favorite: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		}
 	});
 
 	db.sync({

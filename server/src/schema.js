@@ -6,15 +6,16 @@ const typeDefs = [
 	gql`
 		type Query {
 			stocks(
-				offset: Int,
-				limit: Int,
-				orderBy: String,
-				orderDirection: String,
+				offset: Int
+				limit: Int
+				orderBy: String
+				orderDirection: String
 			): StockConnection!
 		}
 
 		type Mutation {
-			updateStocks: UpdateStocks!
+			updateStocks: genericMutationResponse!
+			favoriteStock(status: Boolean, symbol: String): genericMutationResponse!
 		}
 
 		type StockConnection {
@@ -26,7 +27,7 @@ const typeDefs = [
 			stocks: [Stock]!
 		}
 
-		type UpdateStocks {
+		type genericMutationResponse {
 			success: Boolean!
 			message: String
 		}
@@ -48,6 +49,7 @@ const typeDefs = [
 			spRating: String
 			symbol: String!
 			updatedAt: Timestamp!
+			favorite: Boolean!
 		}
 	`,
 ];

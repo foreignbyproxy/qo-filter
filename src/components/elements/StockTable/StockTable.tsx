@@ -5,6 +5,7 @@ import styles from "./StockTable.module.scss";
 
 import DistributionDates from "../DistributionDates/DistributionDates";
 import StockTableSortableHeader from "../StockTableSortableHeader/StockTableSortableHeader";
+import ButtonFavoriteStock from "../ButtonFavoriteStock/ButtonFavoriteStock";
 
 interface StockTableProps {
 	stocks: Stock[];
@@ -21,6 +22,7 @@ const StockTable: FunctionComponent<StockTableProps> = ({
 		<table className={styles["StockTable"]}>
 			<thead>
 				<tr>
+					<td></td>
 					<td>
 						<StockTableSortableHeader
 							slug="symbol"
@@ -60,6 +62,9 @@ const StockTable: FunctionComponent<StockTableProps> = ({
 				{stocks.map((item) => {
 					return (
 						<tr key={item.symbol}>
+							<td>
+								<ButtonFavoriteStock active={item.favorite} symbol={item.symbol} />
+							</td>
 							<td>{item.symbol}</td>
 							<td>{item.description}</td>
 							<td>{item.exchange}</td>

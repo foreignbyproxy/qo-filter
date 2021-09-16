@@ -23,6 +23,17 @@ class stockAPI extends DataSource {
 		});
 	}
 
+	favoriteStock(symbol, status) {
+		return this.store.stocks.update(
+			{ favorite: status },
+			{
+				where: {
+					symbol: symbol,
+				}
+			}
+		);
+	}
+
 	async updateFromQO() {
 		let stocks = await scrapQOData();
 

@@ -25,14 +25,24 @@ export const ALL_STOCKS = gql`
 				spRating
 				symbol
 				updatedAt
+				favorite
 			}
 		}
 	}
 `;
 
-export const UPDATE_DATABASE = gql`
+export const UPDATE_STOCKS = gql`
 	mutation Mutation {
 		updateStocks {
+			success
+			message
+		}
+	}
+`;
+
+export const FAVORITE_STOCK = gql`
+	mutation Mutation($status: Boolean, $symbol: String) {
+		favoriteStock(status: $status, symbol: $symbol) {
 			success
 			message
 		}

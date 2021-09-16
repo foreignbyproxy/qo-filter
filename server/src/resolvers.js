@@ -37,5 +37,24 @@ module.exports = {
 				};
 			}
 		},
+		favoriteStock: async (_, { symbol, status }, { dataSources }) => {
+			try {
+				if(status === undefined || symbol === undefined) {
+					throw new Error('Request did not send status and/or symbol.')
+				}
+
+				await dataSources.stockAPI.favoriteStock(symbol, status);
+
+				return {
+					success: true,
+					message: `${symbol} ${status ? 'favorited' : 'unfavorited'}`,
+				};
+			} catch (error) {
+				return {
+					success: false,
+					message: error.message,
+				};
+			}
+		},
 	},
 };
